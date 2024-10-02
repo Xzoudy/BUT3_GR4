@@ -10,6 +10,9 @@ import com.iut.banque.exceptions.TechnicalException;
 import com.iut.banque.facade.BanqueFacade;
 import com.opensymphony.xwork2.ActionSupport;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class CreerUtilisateur extends ActionSupport {
 
 	private static final long serialVersionUID = 1L;
@@ -193,6 +196,24 @@ public class CreerUtilisateur extends ActionSupport {
 		this.result = result;
 	}
 
+	private String hashPassword(String password) {
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] encodedHash = digest.digest(password.getBytes());
+
+			StringBuilder hexString = new StringBuilder();
+			for (byte b : encodedHash) {
+				String hex = Integer.toHexString(0xff & b);
+				if (hex.length() == 1) hexString.append('0');
+				hexString.append(hex);
+			}
+			return hexString.toString();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+
 	/**
 	 * Création d'un utilisateur.
 	 * 
@@ -201,9 +222,9 @@ public class CreerUtilisateur extends ActionSupport {
 	public String creationUtilisateur() {
 		try {
 			if (client) {
-				banque.createClient(userId, userPwd, nom, prenom, adresse, male, numClient);
+				banque.createClient(userId, this.hashPassword(userPwd), nom, prenom, adresse, male, numClient);
 			} else {
-				banque.createManager(userId, userPwd, nom, prenom, adresse, male);
+				banque.createManager(userId, this.hashPassword(userPwd), nom, prenom, adresse, male);
 			}
 			this.message = "Le nouvel utilisateur avec le user id '" + userId + "' a bien été crée.";
 			this.result = "SUCCESS";

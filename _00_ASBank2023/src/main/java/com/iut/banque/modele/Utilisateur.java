@@ -42,7 +42,7 @@ public abstract class Utilisateur {
 	 * Le mot de passe de l'utilisateur.
 	 * 
 	 */
-	@Column(name = "userPwd")
+	@Column(name = "userPwd", length = 255)
 	private String userPwd;
 
 	/**
