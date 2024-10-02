@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `Compte` (
   `numeroCompte` varchar(50) NOT NULL,
-  `userId` varchar(50) NOT NULL,
+  `userId` varchar(250) NOT NULL,
   `solde` double NOT NULL,
   `avecDecouvert` varchar(5) NOT NULL,
   `decouvertAutorise` decimal(10,0) DEFAULT NULL,
