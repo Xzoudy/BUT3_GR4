@@ -319,11 +319,9 @@ Connectez-vous à MySQL avec l'utilisateur `root` :
    CREATE DATABASE bankiut;
    ```
 
- Si vous souhaitez créer un nouvel utilisateur :
+Créez la base de données test pour l'application :
    ```sql
-   CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'newpassword';
-   GRANT ALL PRIVILEGES ON bankiut.* TO 'newuser'@'localhost';
-   FLUSH PRIVILEGES;
+   CREATE DATABASE bankiuttest;
    ```
 
 ### Accéder à la base de données MySQL depuis IntelliJ
@@ -337,13 +335,17 @@ Connectez-vous à MySQL avec l'utilisateur `root` :
    - **User** : `root` (ou `newuser` si vous en avez créé un autre)
    - **Password** : `root` (ou le mot de passe de `newuser`)
  Testez la connexion puis enregistrez-la.
+Refaite la même étape en modifiant les informations avec la base de donnée bankiuttest, tester la connexion puis enregistrez-la 
 
  ### Importer les tables dans IntelliJ
 
 Accédez à l'onglet **Database**.
- Faites un clic droit sur la fenêtre Database, puis sélectionnez 
-**Import/Export** > **Dump to DDL Data Source**.
+ Faites un clic droit sur la première base de données (bankiut), puis sélectionnez 
+**SQL Script** > **Run SQL Script**.
  Dans la fenêtre qui s'ouvre, sélectionnez le fichier `dumpSQL.sql` qui se trouve dans le dossier `script` de votre projet.
- Validez pour importer les tables dans votre base de données.
+ Validez pour lancer le script et importer les tables dans votre base de données.
+ Répéter la même étape poour la seconde base de données (bankiuttest) avec le fichier `dumpSQL_JUnitTest.sql` qui se trouve aussi dans le dossier `script`.
+
+# Votre application est maintenant fonctionnelle et prête à être lancée !
 
 ---
