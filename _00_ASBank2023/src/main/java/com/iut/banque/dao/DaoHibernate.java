@@ -194,9 +194,10 @@ public class DaoHibernate implements IDao {
 		if (userId == null || userPwd == null) {
 			return false;
 		} else {
+			String HashPassword = Utils.hashPassword(userPwd);
 			session = sessionFactory.openSession();
 			userId = userId.trim();
-			if ("".equals(userId) || "".equals(Utils.hashPassword(userPwd))) {
+			if ("".equals(userId) || "".equals(HashPassword)) {
 				return false;
 			} else {
 				session = sessionFactory.getCurrentSession();
@@ -204,7 +205,7 @@ public class DaoHibernate implements IDao {
 				if (user == null) {
 					return false;
 				}
-				return (userPwd.equals(user.getUserPwd()));
+				return (HashPassword.equals(user.getUserPwd()));
 			}
 		}
 	}
