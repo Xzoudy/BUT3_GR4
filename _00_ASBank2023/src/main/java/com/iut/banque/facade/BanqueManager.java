@@ -20,7 +20,6 @@ public class BanqueManager {
 
 	private Banque bank;
 	private IDao dao;
-	private Utils utils;
 
 	/**
 	 * Constructeur du BanqueManager
@@ -212,7 +211,7 @@ public class BanqueManager {
 	 */
 	public void createManager(String userId, String userPwd, String nom, String prenom, String adresse, boolean male)
 			throws TechnicalException, IllegalArgumentException, IllegalFormatException {
-		dao.createUser(nom, prenom, adresse, male, userId, utils.hashPassword(userPwd), true, null);
+		dao.createUser(nom, prenom, adresse, male, userId, Utils.hashPassword(userPwd), true, null);
 	}
 
 	/**
@@ -249,7 +248,7 @@ public class BanqueManager {
 						"Un client avec le numero de client " + numeroClient + " existe déjà");
 			}
 		}
-		dao.createUser(nom, prenom, adresse, male, userId, utils.hashPassword(userPwd), false, numeroClient);
+		dao.createUser(nom, prenom, adresse, male, userId, Utils.hashPassword(userPwd), false, numeroClient);
 
 	}
 
