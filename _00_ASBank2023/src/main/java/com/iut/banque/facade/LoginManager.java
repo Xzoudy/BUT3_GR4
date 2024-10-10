@@ -5,11 +5,13 @@ import com.iut.banque.interfaces.IDao;
 import com.iut.banque.modele.Gestionnaire;
 import com.iut.banque.modele.Utilisateur;
 
+import com.iut.banque.utils.Utils;
+
 public class LoginManager {
 
 	private IDao dao;
 	private Utilisateur user;
-
+	private Utils utils;
 	/**
 	 * Setter pour la DAO.
 	 * 
@@ -37,7 +39,7 @@ public class LoginManager {
 	 *         l'état du login
 	 */
 	public int tryLogin(String userCde, String userPwd) {
-		if (dao.isUserAllowed(userCde, userPwd)) {
+		if (dao.isUserAllowed(userCde, utils.hashPassword(userPwd))) {
 			user = dao.getUserById(userCde);
 			if (user instanceof Gestionnaire) {
 				return LoginConstants.MANAGER_IS_CONNECTED;

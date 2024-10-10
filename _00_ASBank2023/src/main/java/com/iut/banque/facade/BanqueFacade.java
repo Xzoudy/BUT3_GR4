@@ -20,23 +20,6 @@ public class BanqueFacade {
 	private BanqueManager banqueManager;
 	private LoginManager loginManager;
 
-	private String hashPassword(String password) {
-		try {
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] encodedHash = digest.digest(password.getBytes());
-
-			StringBuilder hexString = new StringBuilder();
-			for (byte b : encodedHash) {
-				String hex = Integer.toHexString(0xff & b);
-				if (hex.length() == 1) hexString.append('0');
-				hexString.append(hex);
-			}
-			return hexString.toString();
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	/**
 	 * Constructeur de la facade sans paramètre
 	 * 
@@ -68,7 +51,7 @@ public class BanqueFacade {
 	 *         prévient de l'état du login
 	 */
 	public int tryLogin(String userCde, String userPwd) {
-		int result = loginManager.tryLogin(userCde, this.hashPassword(userPwd));
+		int result = loginManager.tryLogin(userCde, userPwd);
 		if (result == LoginConstants.MANAGER_IS_CONNECTED) {
 			banqueManager.loadAllClients();
 		}
@@ -204,7 +187,7 @@ public class BanqueFacade {
 	public void createManager(String userId, String userPwd, String nom, String prenom, String adresse, boolean male)
 			throws TechnicalException, IllegalArgumentException, IllegalFormatException {
 		if (loginManager.getConnectedUser() instanceof Gestionnaire) {
-			banqueManager.createManager(userId, this.hashPassword(userPwd), nom, prenom, adresse, male);
+			banqueManager.createManager(userId, userPwd, nom, prenom, adresse, male);
 			;
 		}
 	}
@@ -233,7 +216,7 @@ public class BanqueFacade {
 			String numeroClient)
 			throws IllegalOperationException, TechnicalException, IllegalArgumentException, IllegalFormatException {
 		if (loginManager.getConnectedUser() instanceof Gestionnaire) {
-			banqueManager.createClient(userId, this.hashPassword(userPwd), nom, prenom, adresse, male, numeroClient);
+			banqueManager.createClient(userId, userPwd, nom, prenom, adresse, male, numeroClient);
 		}
 	}
 
