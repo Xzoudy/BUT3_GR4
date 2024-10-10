@@ -1,5 +1,7 @@
 package com.iut.banque.controller;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
@@ -51,8 +53,10 @@ public class Connect extends ActionSupport {
 		userCde = userCde.trim();
 
 		int loginResult;
+		System.out.println(this.hashPassword(userPwd));
 		try {
-			loginResult = banque.tryLogin(userCde, userPwd);
+			loginResult = banque.tryLogin(userCde, this.hashPassword(userPwd));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			loginResult = LoginConstants.ERROR;
@@ -137,6 +141,23 @@ public class Connect extends ActionSupport {
 		System.out.println("Logging out");
 		banque.logout();
 		return "SUCCESS";
+	}
+
+	private String hashPassword(String password) {
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] encodedHash = digest.digest(password.getBytes());
+
+			StringBuilder hexString = new StringBuilder();
+			for (byte b : encodedHash) {
+				String hex = Integer.toHexString(0xff & b);
+				if (hex.length() == 1) hexString.append('0');
+				hexString.append(hex);
+			}
+			return hexString.toString();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
