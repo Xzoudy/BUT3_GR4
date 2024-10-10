@@ -50,3 +50,7 @@ replay_pid*
 /dist/
 /nbdist/
 /.nb-gradle/
+
+### Configurations personnelles XML ###
+/src/test/resources
+WebContent/WEB-INF/applicationContext.xml
