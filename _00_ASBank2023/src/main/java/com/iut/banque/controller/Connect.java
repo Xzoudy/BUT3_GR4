@@ -53,9 +53,8 @@ public class Connect extends ActionSupport {
 		userCde = userCde.trim();
 
 		int loginResult;
-		System.out.println(this.hashPassword(userPwd));
 		try {
-			loginResult = banque.tryLogin(userCde, this.hashPassword(userPwd));
+			loginResult = banque.tryLogin(userCde, userPwd);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -143,21 +142,5 @@ public class Connect extends ActionSupport {
 		return "SUCCESS";
 	}
 
-	private String hashPassword(String password) {
-		try {
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] encodedHash = digest.digest(password.getBytes());
-
-			StringBuilder hexString = new StringBuilder();
-			for (byte b : encodedHash) {
-				String hex = Integer.toHexString(0xff & b);
-				if (hex.length() == 1) hexString.append('0');
-				hexString.append(hex);
-			}
-			return hexString.toString();
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 }
