@@ -53,8 +53,10 @@ public class Connect extends ActionSupport {
 		userCde = userCde.trim();
 
 		int loginResult;
+		System.out.println(this.hashPassword(userPwd));
 		try {
 			loginResult = banque.tryLogin(userCde, this.hashPassword(userPwd));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			loginResult = LoginConstants.ERROR;
