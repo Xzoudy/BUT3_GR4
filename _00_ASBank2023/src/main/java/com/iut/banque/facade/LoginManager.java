@@ -38,7 +38,7 @@ public class LoginManager {
 	 *         l'état du login
 	 */
 	public int tryLogin(String userCde, String userPwd) {
-		if (dao.isUserAllowed(userCde, Utils.hashPassword(userPwd))) {
+		if (dao.isUserAllowed(userCde, userPwd)) {
 			user = dao.getUserById(userCde);
 			if (user instanceof Gestionnaire) {
 				return LoginConstants.MANAGER_IS_CONNECTED;
