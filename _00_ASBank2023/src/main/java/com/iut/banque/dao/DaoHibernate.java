@@ -19,6 +19,7 @@ import com.iut.banque.modele.CompteSansDecouvert;
 import com.iut.banque.modele.Gestionnaire;
 import com.iut.banque.modele.Utilisateur;
 
+import com.iut.banque.utils.Utils;
 /**
  * Implémentation de IDao utilisant Hibernate.
  * 
@@ -195,7 +196,7 @@ public class DaoHibernate implements IDao {
 		} else {
 			session = sessionFactory.openSession();
 			userId = userId.trim();
-			if ("".equals(userId) || "".equals(userPwd)) {
+			if ("".equals(userId) || "".equals(Utils.hashPassword(userPwd))) {
 				return false;
 			} else {
 				session = sessionFactory.getCurrentSession();
