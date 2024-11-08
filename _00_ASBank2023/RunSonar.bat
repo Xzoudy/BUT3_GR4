@@ -1,1 +1,1 @@
-mvn clean verify sonar:sonar -Dsonar.projectKey=BANK_IUT_2023 -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_c55e85adf298ef5ffae40c13ec282dfc9482301b
+mvn clean verify sonar:sonar -Dsonar.projectKey=BANK_IUT_2024 -Dsonar.projectName='BANK_IUT_2024' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_7156bdbcfc34697d13ab5db8d1e444de21640845
