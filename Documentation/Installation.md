@@ -111,6 +111,8 @@ Entrez les informations de connexion suivantes :
   Testez la connexion puis enregistrez-la.
   Refaite la même étape en modifiant les informations avec la base de donnée bankiuttest, tester la connexion puis enregistrez-la
 
+**Pensez bien à adapter les fichiers  XML en fonction de votre User et de votre Password.**
+
 ### Importer les tables dans IntelliJ
 
 Accédez à l'onglet **Database**.
@@ -119,6 +121,7 @@ Faites un clic droit sur la première base de données (bankiut), puis sélectio
 Dans la fenêtre qui s'ouvre, sélectionnez le fichier `dumpSQL.sql` qui se trouve dans le dossier `script` de votre projet.
 Validez pour lancer le script et importer les tables dans votre base de données.
 Répéter la même étape poour la seconde base de données (bankiuttest) avec le fichier `dumpSQL_JUnitTest.sql` qui se trouve aussi dans le dossier `script`.
+
 
 # Votre application est maintenant fonctionnelle et prête à être lancée !
 
@@ -360,6 +363,8 @@ Créez la base de données test pour l'application :
    - **Password** : `root` (ou le mot de passe de `newuser`)
  Testez la connexion puis enregistrez-la.
 Refaite la même étape en modifiant les informations avec la base de donnée bankiuttest, tester la connexion puis enregistrez-la 
+
+**Pensez bien à adapter les fichiers  XML en fonction de votre User et de votre Password.**
 
  ### Importer les tables dans IntelliJ
 
