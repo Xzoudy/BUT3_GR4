@@ -54,3 +54,5 @@ replay_pid*
 ### Configurations personnelles XML ###
 /src/test/resources
 WebContent/WEB-INF/applicationContext.xml
+
+.vscode
