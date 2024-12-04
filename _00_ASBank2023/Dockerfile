@@ -12,6 +12,6 @@ RUN mvn clean package -DskipTests
 
 FROM tomcat:9.0-jdk11-openjdk-slim
 
-COPY --from=build /app/target/_00_ASBank2023-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/projet.war
+COPY --from=build /app/target/_00_ASBank2023-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
 
 CMD ["catalina.sh", "run"]
