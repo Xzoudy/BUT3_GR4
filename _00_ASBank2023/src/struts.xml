@@ -55,7 +55,7 @@
 			<result>/JSP/Index.jsp</result>
 		</action>
 
-		<action name="redirectionLogin">
+		<action name="redirectionLogin" Connecte toi stp >
 			<result>/JSP/Login.jsp</result>
 		</action>
 
